@@ -32,5 +32,7 @@ if ! docker compose version >/dev/null 2>&1; then
 fi
 if ! id -nG | grep -qw docker; then
     sudo usermod -aG docker $USER
+    echo "docker has been installed and the current user was added to the docker group. please restart the session for the changes to take effect"
 fi
-echo "docker has been installed and the current user was added to the docker group. please restart the session for the changes to take effect"
+
+echo "SETUP COMPLETE"
