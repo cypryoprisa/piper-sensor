@@ -115,6 +115,14 @@ services:
       - "graylog_data:/usr/share/graylog/data/data"
     restart: "on-failure"
 
+  syslog-ng:
+    image: balabit/syslog-ng:latest
+    volumes:
+      # pihole logs
+      - './var-log-pihole:/var/log/pihole'
+      # config file
+      - './syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf'
+
 networks:
   graylog:
     driver: "bridge"
