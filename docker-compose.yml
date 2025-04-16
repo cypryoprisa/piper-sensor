@@ -116,7 +116,7 @@ services:
     restart: "on-failure"
 
   syslog-ng:
-    image: balabit/syslog-ng:latest
+    image: balabit/syslog-ng:nightly # only nightly supports arm64
     volumes:
       # pihole logs
       - './var-log-pihole:/var/log/pihole'
