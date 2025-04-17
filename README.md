@@ -25,3 +25,33 @@ git clone https://github.com/cypryoprisa/piper-sensor.git
 cd piper-sensor
 ```
 
+Run the `setup.sh` script:
+
+```./setup.sh```
+This script will:
+* prepare a `.env` file with environment variables for Graylog;
+* ask you for a Graylog password -- use a strong password, unique for each organisation that this sensor is deployed to;
+* install `docker`, `docker compose` and other dependencies;
+* add the current user to the `docker` group; for changes to take effect, close the current session and log in again.
+
+## First run
+Run the `start.sh` script:
+
+```./start.sh```
+
+This script will use `docker compose` to run multiple containers, including `pihole` and `graylog`. During the first run, the docker images will be downloaded from the internet, so the process might take some time.
+
+After all containers have started, open a browser (on your local machine) and navigate to `http://<PIPER_IP>:9000` to open the Graylog dashboard. The Firefox browser is recommended for this.
+
+During the first run, you must set up the Graylog server. You cannot login with your password yet, a temporary password will be used. To find it, run
+
+```
+docker logs piper-sensor-graylog-1
+```
+
+At the end of the log message, you should find a text containing the temporary credentials. Use the to login in the browser. The message should look like the one below:
+
+```
+Initial configuration is accessible at 0.0.0.0:9000, with username 'admin' and password '<TempPasswd>'.
+```
+

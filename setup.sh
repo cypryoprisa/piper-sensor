@@ -24,6 +24,15 @@ if grep -q 'GRAYLOG_PASSWORD_SECRET=""' .env || grep -q 'GRAYLOG_ROOT_PASSWORD_S
     exit 1
 fi
 
+if [ "$(sysctl -n vm.max_map_count)" -lt 262144 ]; then
+    if ! grep -q "vm.max_map_count" /etc/sysctl.conf; then
+        sudo printf "\nvm.max_map_count=262144\n" >>/etc/sysctl.conf
+    else
+        sudo sed -i "s/^vm\.max_map_count=.*/vm.max_map_count=262144/" /etc/sysctl.conf
+    fi
+    sudo sysctl -p
+fi
+
 # install docker and docker compose
 if ! docker compose version >/dev/null 2>&1; then
     sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
