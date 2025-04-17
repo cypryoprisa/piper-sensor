@@ -131,6 +131,7 @@ services:
       - SYSLOG
     networks:
       - graylog
+    restart: unless-stopped
 
 networks:
   graylog:
