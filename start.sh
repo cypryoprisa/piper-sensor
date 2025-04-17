@@ -16,4 +16,11 @@ if [ -f "$LOG_FILE" ]; then
     mv "$LOG_FILE" "${LOG_FILE}_${TIMESTAMP}"
 fi
 
+# replace the default pihole adlists
+DEST_DIR="etc-pihole"
+if [ ! -d "$DEST_DIR" ]; then
+    mkdir -p "$DEST_DIR"
+fi
+cp -f adlists.list "$DEST_DIR/adlists.list"
+
 docker compose up -d
