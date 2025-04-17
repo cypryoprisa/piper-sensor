@@ -29,7 +29,7 @@ Run the `setup.sh` script:
 
 ```./setup.sh```
 This script will:
-* prepare a `.env` file with environment variables for Graylog;
+* prepare a `.env` file with environment variables for [Graylog](https://graylog.org/);
 * ask you for a Graylog password -- use a strong password, unique for each organisation that this sensor is deployed to;
 * install `docker`, `docker compose` and other dependencies;
 * add the current user to the `docker` group; for changes to take effect, close the current session and log in again.
