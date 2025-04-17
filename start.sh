@@ -10,6 +10,7 @@ echo ""
 echo "          🐛   🦠   🐞   💣   👾   🧟‍♂️"
 
 # backup old pihole logs so they wont't be sent again to graylog
+mkdir -p var-log-pihole
 LOG_FILE="var-log-pihole/pihole.log"
 if [ -f "$LOG_FILE" ]; then
     TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
