@@ -6,6 +6,11 @@ if [ ! -f .env ]; then
     echo ".env file does not exist. creating..."
     cp .env.example .env
     sed -i "s/^GRAYLOG_PASSWORD_SECRET=\"\"/GRAYLOG_PASSWORD_SECRET=\"$(pwgen -N 1 -s 96)\"/" .env
+    # set the graylog password
+    read -s -p "Set a password for Graylog: " GRAYLOG_PASSWORD
+    echo
+    GRAYLOG_PASSWORD_HASH=$(echo -n "$GRAYLOG_PASSWORD" | shasum -a 256 | awk '{print $1}')
+    sed -i "s/^GRAYLOG_ROOT_PASSWORD_SHA2=\"\"/GRAYLOG_ROOT_PASSWORD_SHA2=\"$GRAYLOG_PASSWORD_HASH\"/" .env
 fi
 
 if grep -q 'GRAYLOG_PASSWORD_SECRET=""' .env || grep -q 'GRAYLOG_ROOT_PASSWORD_SHA2=""' .env; then
