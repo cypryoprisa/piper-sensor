@@ -26,7 +26,7 @@ fi
 
 if [ "$(sysctl -n vm.max_map_count)" -lt 262144 ]; then
     if ! grep -q "vm.max_map_count" /etc/sysctl.conf; then
-        sudo printf "\nvm.max_map_count=262144\n" >>/etc/sysctl.conf
+        sudo bash -c 'printf "\nvm.max_map_count=262144\n" >>/etc/sysctl.conf'
     else
         sudo sed -i "s/^vm\.max_map_count=.*/vm.max_map_count=262144/" /etc/sysctl.conf
     fi
