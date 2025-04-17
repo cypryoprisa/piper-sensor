@@ -7,7 +7,7 @@ if [ ! -f .env ]; then
     cp .env.example .env
     sed -i "s/^GRAYLOG_PASSWORD_SECRET=\"\"/GRAYLOG_PASSWORD_SECRET=\"$(pwgen -N 1 -s 96)\"/" .env
     # set the graylog password
-    read -s -p "Set a password for Graylog: " GRAYLOG_PASSWORD
+    read -p "Set a password for Graylog: " GRAYLOG_PASSWORD
     echo
     GRAYLOG_PASSWORD_HASH=$(echo -n "$GRAYLOG_PASSWORD" | shasum -a 256 | awk '{print $1}')
     sed -i "s/^GRAYLOG_ROOT_PASSWORD_SHA2=\"\"/GRAYLOG_ROOT_PASSWORD_SHA2=\"$GRAYLOG_PASSWORD_HASH\"/" .env
